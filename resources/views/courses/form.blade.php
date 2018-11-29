@@ -125,21 +125,68 @@
                         <div class="card-header">{{ __("Sube archivos a tu curso") }}</div>
                         <div class="card-body">
                             <div class="form-group row">
-                                <div class="col-md-6 offset-4">
+                                <label
+                                    for="update1"
+                                    class="col-md-4 col-form-label text-md-right"
+                                >
+                                    {{ __("Archivo / Video (1)") }}
+                                </label>
+                                <div class="col-md-6">
                                     <input
                                         type="file"
-                                        class="custom-file-input{{ $errors->has('file') ? ' is-invalid' : ''}}"
-                                        id="file"
-                                        name="file"
+                                        id="update1"
+                                        class="form-control{{ $errors->has('updates.0') ? ' is-invalid' : '' }}"
+                                        name="updates[]"
+                                        multiple
+                                        value="{{ old('updates.0') ? old('updates.0') : ($course->updates_count > 0 ? $course->updates[0]->file : '') }}"
                                     />
-                                    <label
-                                        class="custom-file-label" for="picture"
-                                    >
-                                        {{ __("Escoge archivos para tu curso") }}
-                                    </label>
+                                    @if ($errors->has('updates.0'))
+                                        <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('updates.0') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
+
+                                @if($course->updates_count > 0)
+                                    <input
+                                        type="hidden"
+                                        name="update_id0"
+                                        value="{{ $course->updates[0]->id }}"
+                                    />
+                                @endif
                             </div>
 
+                            {{--<div class="form-group row">--}}
+                                {{--<label--}}
+                                    {{--for="update2"--}}
+                                    {{--class="col-sm-4 col-form-label text-md-right"--}}
+                                {{-->--}}
+                                    {{--{{ __("Archivo / Video (2)") }}--}}
+                                {{--</label>--}}
+                                {{--<div class="col-md-6">--}}
+                                    {{--<input--}}
+                                        {{--type="file"--}}
+                                        {{--id="update2"--}}
+                                        {{--class="form-control{{ $errors->has('updates.1') ? ' is-invalid' : '' }}"--}}
+                                        {{--name="updates[]"--}}
+                                        {{--value="{{ old('updates.1') ? old('updates.1') : ($course->updates_count > 1 ? $course->updates[1]->file : '') }}"--}}
+                                    {{--/>--}}
+
+                                    {{--@if ($errors->has('updates.1'))--}}
+                                        {{--<span class="invalid-feedback">--}}
+                                            {{--<strong>{{ $errors->first('updates.1') }}</strong>--}}
+                                        {{--</span>--}}
+                                    {{--@endif--}}
+                                {{--</div>--}}
+
+                                {{--@if($course->updates_count > 1)--}}
+                                    {{--<input--}}
+                                        {{--type="hidden"--}}
+                                        {{--name="update_id1"--}}
+                                        {{--value="{{ $course->updates[1]->id }}"--}}
+                                    {{--/>--}}
+                                {{--@endif--}}
+                            {{--</div>--}}
                         </div>
                     </div>
                 </div>

@@ -11,7 +11,7 @@
 <div class="pl-5 pr-5">
     <div class="row justify-content-center">
         @forelse($courses as $course)
-                <div class="col-md-3">
+                <div class="col-md-4">
                     @include('partials.courses.card_course')
                 </div>
             @empty

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Helpers\Helper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -37,6 +38,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Course whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Course whereTeacherId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Course whereUpdatedAt($value)
+ * @property-read \App\Category $category
+ * @property-read mixed $rating
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Goal[] $goals
+ * @property-read \App\Level $level
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Requirement[] $requirements
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Review[] $reviews
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Student[] $students
+ * @property-read \App\Teacher $teacher
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\App\Course onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Query\Builder|\App\Course withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Course withoutTrashed()
  */
 class Course extends Model
 {
@@ -83,7 +97,19 @@ class Course extends Model
                        }
                    }
                }
-
+               if ( request('updates')) {
+                   foreach (request('updates') as $key => $file_input) {
+                      if ($file_input) {
+                          $filePath = public_path() . '/storage/content/';
+                          $name = $file_input->getClientOriginalName();
+                          $file_input->move($filePath, $name);
+                          Update::updateOrCreate(['id' => request('update_id' . $key)],[
+                              'course_id' => $course->id,
+                              'file' => $name
+                          ]);
+                      }
+                   }
+               }
            }
         });
     }
@@ -118,6 +144,10 @@ class Course extends Model
 
     public function requirements(){
         return $this->hasMany(Requirement::class)->select('id', 'course_id', 'requirement');
+    }
+
+    public function updates() {
+        return $this->hasMany(Update::class)->select('id', 'course_id', 'file');
     }
 
     public function students(){

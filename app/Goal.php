@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Goal whereGoal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Goal whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Goal whereUpdatedAt($value)
+ * @property-read \App\Course $course
  */
 class Goal extends Model
 {

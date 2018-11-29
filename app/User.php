@@ -37,6 +37,15 @@ use Laravel\Cashier\Billable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereStripeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereTrialEndsAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
+ * @property string|null $last_name
+ * @property string $slug
+ * @property-read \App\Role $role
+ * @property-read \App\UserSocialAccount $socialAccount
+ * @property-read \App\Student $student
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Cashier\Subscription[] $subscriptions
+ * @property-read \App\Teacher $teacher
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereSlug($value)
  */
 class User extends Authenticatable
 {

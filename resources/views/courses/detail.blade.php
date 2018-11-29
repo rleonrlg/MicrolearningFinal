@@ -11,7 +11,7 @@
             @include('partials.courses.goals', ['goals' => $course->goals])
             @include('partials.courses.requirements', ['requirements' => $course->requirements])
             @include('partials.courses.description')
-            @include('partials.courses.Content')
+            @include('partials.courses.Content', ['updates' => $course->updates])
             @include('partials.courses.related')
             @include('partials.courses.form_review')
         </div>

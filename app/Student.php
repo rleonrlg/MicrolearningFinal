@@ -18,6 +18,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereUserId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Course[] $courses
+ * @property-read mixed $courses_formatted
+ * @property-read \App\User $user
  */
 class Student extends Model
 {

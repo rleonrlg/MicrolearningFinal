@@ -10,6 +10,7 @@ use App\Http\Requests\CourseRequest;
 use App\Mail\CourseApproved;
 use App\Mail\NewStudentInCourse;
 use App\Review;
+use App\Update;
 use function foo\func;
 
 class CourseController extends Controller
@@ -66,9 +67,7 @@ class CourseController extends Controller
 
     public function store(CourseRequest $course_request){
         $picture = Helper::uploadFile('picture', 'courses');
-        $file = Helper::uploadVideo('file', 'content');
         $course_request->merge(['picture' => $picture]);
-        $course_request->merge(['file' => $file]);
         $course_request->merge(['teacher_id' => auth()->user()->teacher->id]);
         $course_request->merge(['status' => Course::PENDING]);
         Course::create($course_request->input());
@@ -76,7 +75,7 @@ class CourseController extends Controller
     }
 
     public function edit ($slug) {
-        $course = Course::with(['requirements', 'goals'])->withCount(['requirements', 'goals'])
+        $course = Course::with(['requirements', 'goals', 'updates'])->withCount(['requirements', 'goals', 'updates'])
             ->whereSlug($slug)->first();
         $btnText = __("Actualizar curso");
         return view('courses.form', compact('course', 'btnText'));

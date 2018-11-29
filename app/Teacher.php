@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Teacher whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Teacher whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Teacher whereWebsiteUrl($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Course[] $courses
+ * @property-read \App\User $user
  */
 class Teacher extends Model
 {

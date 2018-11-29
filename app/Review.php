@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Review whereRating($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Review whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Review whereUserId($value)
+ * @property-read \App\Course $course
+ * @property-read \App\User $user
  */
 class Review extends Model
 {
